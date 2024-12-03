@@ -14,3 +14,7 @@ Just a collection of notes while following the book example in chapter 2.
     2. For small datasets a random split might produce significant **sampling bias**
     Similarly, when people are asked in a phone survey, the sample should correspond to the population which is called **stratified sampling**. Population is divided into homogeneous subgroups called **strata**, and the right number of instances are sampled from each stratum to guarantee that the test set is representative. Similarly, one could divide numerical features into categories (strata) to have a sufficient number of instances in the dataset and use the histogram across those strata for train test split:
     Use `from sklearn.model_selection import StratifiedShuffleSplit` or `train_test_split` with the `stratify` argument. 
+- Before exploration copy train data as we often run manipulations on them. Take a subset if train set is to large
+- For missing data, either drop or set NaN to median, mean, etc (**inputation**). For last option use `sklearn.impute.SimpleImputer` or `sklearn.impute.KNNImputer` or `sklearn.impute.IterativeImputer`
+
+HANDLING TEXT AND CATEGORICAL ATTRIBUTES
