@@ -16,5 +16,15 @@ Just a collection of notes while following the book example in chapter 2.
     Use `from sklearn.model_selection import StratifiedShuffleSplit` or `train_test_split` with the `stratify` argument. 
 - Before exploration copy train data as we often run manipulations on them. Take a subset if train set is to large
 - For missing data, either drop or set NaN to median, mean, etc (**inputation**). For last option use `sklearn.impute.SimpleImputer` or `sklearn.impute.KNNImputer` or `sklearn.impute.IterativeImputer`
-
-HANDLING TEXT AND CATEGORICAL ATTRIBUTES
+- For categorical data, use `sklearn.preprocessing.OrginalEncoder` class to transform into numberical values. Most ML algorithms assume those values to be more similar as they are not as distant, which might me wrong if categories are not ordered. 
+- Solution, use *one-hot encoding*: For each category set up a column with 0 and 1 for true or false (`sklearn.preprocessing.OneHotEncoder`).
+- Most import preprocessing step: Scaling as features are on different scales. Use `MinMaxScaler` or `StandardScaler` from `sklearn.preprocessing. The latter is less affected by outliers!
+- Both scalers don't like heavy tail / non-exponential tails! Use log-transforms or sqrt / power between 0 and 1 of those features. **Bucketizing** features: Chopping each feature into equal-sized ranges and replacing each feature value with the index of the bucket (e.g. bucket based on percentile)
+- If features are multi-model (many peaks) one could make a new feature for each values similarity to a specific mode using radial basis functions e.g. `sklearn.metrics.pairwise.rbf_kernel`
+- **Remark:** Most Scikit-Learn tranformers haven an `inverse_transform()`
+- There are also *Custom Transformers*
+- We can use `pipelines` to summarize and sequentially execute transformers, scaling etc or just use your own functions
+- Use **k fold cross validation** for train test splitting
+- Use Grid Search for small combinations of hyper paramters and **Randomized Search** for large combinations
+- Use the `joblib' library to save the best model and transfer the file to your prodcution environment e.g. running on a server where users can use an app to pass some data and effectively use the predict method. You can also upload the model to Google Cloud Storage
+- Automate e.g. weekly training, checking of input data quality etc
